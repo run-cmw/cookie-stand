@@ -10,5 +10,10 @@ var pike = {
 
   custPerHour: function() {
     return Math.round(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-  }
+  },
+  cookiesPerHour: function() {
+    return Math.round(custPerHour() * cookiesPerCust);
+  },
+  
+
 };
