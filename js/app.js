@@ -2,6 +2,7 @@
 
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 var allStores = [];
+var storeTable = document.getElementById('stores');
 
 function Store(location, minCust, maxCust, cookiesPerCust) {
   this.location = location;
@@ -25,22 +26,39 @@ Store.prototype.custPerHour = function() {
 Store.prototype.cookiesPerHour = function() {
   return Math.ceil(this.custPerHour() * this.cookiesPerCust);
 };
-Store.prototype.hourlyCookiesPush = function () {
+Store.prototype.hourlyCookiesPush = function() {
   for (var i in hours) {
     this.hourlyCookiesArr.push(this.cookiesPerHour());
   }
 };
-Store.prototype.totalCookies = function () {
+Store.prototype.totalCookies = function() {
   for (var i in this.hourlyCookiesArr) {
     this.dailyCookies += this.hourlyCookiesArr[i];
-    console.log('Daily cookies is now: ' + this.dailyCookies);
   }
 };
+Store.prototype.render = function() {
+  this.hourlyCookiesPush();
+  this.totalCookies();
+  // create new HTML element
+  var trEl = document.createElement('tr');
+  // give the element content (15 many times?!)
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.hourlyCookiesArr + ' cookies';
+  // append the element to the correct spot in document
+  trEl.appendChild(tdEl);
+};
 
-console.table(allStores);
-// console.log(allStores[0].custPerHour());
-// console.log(allStores[0].cookiesPerHour());
-console.log(allStores[0].hourlyCookiesPush());
-console.table(allStores[0].hourlyCookiesArr);
-console.log(allStores[0].totalCookies());
-console.log(allStores[0].dailyCookies);
+
+// for (var i in this.hourlyCookiesArr) {
+  // var tdEl = document.createElement('td');
+  // tdEl.textContent = this.hourlyCookiesArr[i] + ' cookies';
+// }
+
+
+
+
+
+// loop to invoke the render method on all locations
+for (var i in allStores) {
+  allStores[i].render();
+}
