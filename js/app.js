@@ -41,11 +41,12 @@ Store.prototype.render = function() {
   this.totalCookies();
   // create new HTML element
   var trEl = document.createElement('tr');
-  // give the element content (15 many times?!)
+  // give the element content - create, content, and append hourly cookie totals (15 many times?!)
   var tdEl = document.createElement('td');
-  tdEl.textContent = this.hourlyCookiesArr + ' cookies';
-  // append the element to the correct spot in document
+  tdEl.textContent = this.hourlyCookiesArr[0] + ' cookies';
   trEl.appendChild(tdEl);
+  // append the element to the correct spot in document
+  storeTable.appendChild(trEl);
 };
 
 
@@ -55,10 +56,12 @@ Store.prototype.render = function() {
 // }
 
 
-
-
-
+// Change: just wrapped the workin loop in a function and called the function - is that the problem?
 // loop to invoke the render method on all locations
-for (var i in allStores) {
-  allStores[i].render();
+function displayDailyCookieData() {
+  for (var i in allStores) {
+    allStores[i].render();
+  }
 }
+
+displayDailyCookieData();
