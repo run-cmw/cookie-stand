@@ -19,6 +19,7 @@ body {
   padding: 20px 30px;
 }
 
+/*use nave selector instead of id*/
 .nav {
   display: inline;
   margin: 20px 70px;
@@ -42,7 +43,8 @@ a:hover {
 /*background image opacity .5
 background image attribution: https://www.flickr.com/photos/53532879@N07/10460205174/*/
 
-.main{
+/*main background for all h2s or make others besides first after nav tan color: rgb(186, 150, 87);? */
+main {
   background-image: url(../images/main.jpg);
   opacity: 0.5;
 }

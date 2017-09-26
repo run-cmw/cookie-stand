@@ -41,11 +41,12 @@ var pike = {
     // give that element content
     liEl2.textContent = 'Total: ' + this.dailyCookies + ' cookies';
     // append that element to the right spot in the document
-    var pikeUl2 = document.getElementById('pike');
+    var pikeUl2 = document.getElementById('pike'); //pikeul@ this is the same parent as in line 36, so declare the first one before for loop
     pikeUl2.appendChild(liEl2);
   }
 };
 
+// where to call the hourlyCookiesFun and totalCookies?? Learn today!
 pike.hourlyCookiesFun();
 pike.totalCookies();
 pike.render();
