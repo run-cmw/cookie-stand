@@ -99,3 +99,53 @@ var seaTac = {
 seaTac.hourlyCookiesFun();
 seaTac.totalCookies();
 seaTac.render();
+
+
+
+var seaCen = {
+  location: 'Seattle Center',
+  minCust: 11,
+  maxCust: 38,
+  cookiesPerCust: 3.7,
+  hourlyCookiesArr: [],
+  dailyCookies: 0,
+
+  custPerHour: function() {
+    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
+  },
+  cookiesPerHour: function() {
+    return Math.ceil(this.custPerHour() * this.cookiesPerCust);
+  },
+  hourlyCookiesFun: function() {
+    for (var i = 0; i < hours.length; i++) {
+      this.hourlyCookiesArr.push(this.cookiesPerHour());
+    }
+  },
+  totalCookies: function() {
+    for (var i in this.hourlyCookiesArr) {
+      this.dailyCookies += this.hourlyCookiesArr[i];
+    }
+  },
+  render: function() {
+    for (var i in this.hourlyCookiesArr) {
+      // create a new HTML element
+      var liEl = document.createElement('li');
+      // give that element content
+      liEl.textContent = hours[i] + ': ' + this.hourlyCookiesArr[i] + ' cookies';
+      // append that element to the right spot in the document
+      var seaCenUl = document.getElementById('seaCen');
+      seaCenUl.appendChild(liEl);
+    }
+    // create a new HTML element
+    var liEl2 = document.createElement('li');
+    // give that element content
+    liEl2.textContent = 'Total: ' + this.dailyCookies + ' cookies';
+    // append that element to the right spot in the document
+    var seaCenUl2 = document.getElementById('seaCen');
+    seaCenUl2.appendChild(liEl2);
+  }
+};
+
+seaCen.hourlyCookiesFun();
+seaCen.totalCookies();
+seaCen.render();
