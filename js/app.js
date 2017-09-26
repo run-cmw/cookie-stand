@@ -23,8 +23,12 @@ console.table(allStores);
 Store.prototype.custPerHour = function() {
   return Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
 };
+Store.prototype.cookiesPerHour = function() {
+  return Math.ceil(this.custPerHour() * this.cookiesPerCust);
+};
 
 console.log(allStores[0].custPerHour());
+console.log(allStores[0].cookiesPerHour());
 
 
 // var alki = {
