@@ -1,0 +1,68 @@
+* {
+  /*border: 1px solid black;*/
+}
+
+body {
+  background-color: rgb(169, 86, 52);
+  color: rgb(25, 15, 3);
+  font-size: 18px;
+}
+
+#logo{
+  margin: 0 0 100px 0;
+}
+
+#navigation {
+  /*position: fixed;*/
+  background-color: rgb(39, 49, 38);
+  background-color: rgba(39, 49, 38, 0.3);
+  padding: 20px 30px;
+}
+
+.nav {
+  display: inline;
+  margin: 20px 70px;
+  font-size: 20px;
+}
+
+a:link {
+  color: rgb(25, 15, 3);
+  text-decoration: none;
+}
+
+a:visited {
+  color: rgb(25, 15, 3);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(186, 150, 87);
+}
+
+/*background image opacity .5
+background image attribution: https://www.flickr.com/photos/53532879@N07/10460205174/*/
+
+.main{
+  background-image: url(../images/main.jpg);
+  opacity: 0.5;
+}
+
+h2 {
+  /*position: fixed;*/
+  background-color: rgb(39, 49, 38);
+  background-color: rgba(39, 49, 38, 0.4);
+  padding: 20px 30px;
+}
+
+/*Location list displays to the left of the map*/
+/*li {
+  display: inline;*/
+}
+
+iframe {
+  width: 640px;
+  height: 480px;
+  margin: 20px;
+  /*float: right;  */
+  /*does my css on iframe not work?*/
+}
