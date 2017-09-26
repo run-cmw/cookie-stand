@@ -18,7 +18,6 @@ new Store('SeaTac Airport', 3, 24, 1.2);
 new Store('Seattle Center', 11, 38, 3,7);
 new Store('Capitol Hill', 20, 38, 2.3);
 new Store('Alki', 2, 16, 4,6);
-console.table(allStores);
 
 Store.prototype.custPerHour = function() {
   return Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
@@ -31,3 +30,17 @@ Store.prototype.hourlyCookiesPush = function () {
     this.hourlyCookiesArr.push(this.cookiesPerHour());
   }
 };
+Store.prototype.totalCookies = function () {
+  for (var i in this.hourlyCookiesArr) {
+    this.dailyCookies += this.hourlyCookiesArr[i];
+    console.log('Daily cookies is now: ' + this.dailyCookies);
+  }
+};
+
+console.table(allStores);
+// console.log(allStores[0].custPerHour());
+// console.log(allStores[0].cookiesPerHour());
+console.log(allStores[0].hourlyCookiesPush());
+console.table(allStores[0].hourlyCookiesArr);
+console.log(allStores[0].totalCookies());
+console.log(allStores[0].dailyCookies);

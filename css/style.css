@@ -14,7 +14,6 @@ body {
 
 #navigation {
   /*position: fixed;*/
-  background-color: rgb(39, 49, 38);
   background-color: rgba(39, 49, 38, 0.3);
   padding: 20px 30px;
 }
@@ -51,7 +50,6 @@ main {
 
 h2 {
   /*position: fixed;*/
-  background-color: rgb(39, 49, 38);
   background-color: rgba(39, 49, 38, 0.4);
   padding: 20px 30px;
 }
