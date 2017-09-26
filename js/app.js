@@ -20,13 +20,13 @@ var pike = {
     for (var i = 0; i < hours.length; i++) {
       this.hourlyCookiesArr.push(this.cookiesPerHour());
     }
-    return this.hourlyCookiesArr;
   },
-  // totalCookies: function() {
-  //   for (var i in this.hourlyCookiesArr) {
-  //     this.dailyCookies += this.hourlyCookiesArr[i];
-  //   }
-  // }
+  totalCookies: function() {
+    for (var i in this.hourlyCookiesArr) {
+      this.dailyCookies += this.hourlyCookiesArr[i];
+      // console.log(this.dailyCookies);
+    }
+  }
 
 
   // render: function() {
