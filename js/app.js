@@ -39,9 +39,18 @@ Store.prototype.totalCookies = function() {
 Store.prototype.render = function() {
   this.hourlyCookiesPush();
   this.totalCookies();
-  // create new HTML element
+  // create a new HTML element
   var trEl = document.createElement('tr');
-  // give the element content - create, content, and append hourly cookie totals (15 many times?!)
+  // give the column content - create, content, and append location values to row
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.location;
+  trEl.appendChild(tdEl);
+  //append the row to the table
+  storeTable.appendChild(trEl);
+
+  // Inner list Data: create new HTML element
+  // var trEl = document.createElement('tr'); //<-------DON'T NEED THIS ONE??
+  // give the element content - create, content, and append hourly cookie totals array
   for (var i in this.hourlyCookiesArr) {
     var tdEl = document.createElement('td');
     tdEl.textContent = this.hourlyCookiesArr[i] + ' cookies';
@@ -50,12 +59,6 @@ Store.prototype.render = function() {
   // append the element to the correct spot in document
   storeTable.appendChild(trEl);
 };
-
-
-// for (var i in this.hourlyCookiesArr) {
-  // var tdEl = document.createElement('td');
-  // tdEl.textContent = this.hourlyCookiesArr[i] + ' cookies';
-// }
 
 
 // loop to invoke the render method on all locations
