@@ -7,13 +7,54 @@ var pike = {
   minCust: 23,
   maxCust: 65,
   cookiesPerCust: 6.3,
+  hourlyCookiesArr: [], // should this array be here or near the method that uses it?
+  dailyCookies: 0,
 
   custPerHour: function() {
-    return Math.round(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
+    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
   },
   cookiesPerHour: function() {
-    return Math.round(custPerHour() * cookiesPerCust);
+    return Math.round(this.custPerHour() * this.cookiesPerCust);
   },
-  
+  hourlyCookiesFun: function() {
+    for (var i = 0; i < hours.length; i++) {
+      this.hourlyCookiesArr.push(this.cookiesPerHour());
+    }
+    return this.hourlyCookiesArr;
+  },
+  // totalCookies: function() {
+  //   for (var i in this.hourlyCookiesArr) {
+  //     this.dailyCookies += this.hourlyCookiesArr[i];
+  //   }
+  // }
+
+
+  // render: function() {
+  //   // create a new HTML element
+  //   var liEl = document.createElement('li');
+  //   // give that element content
+  //   liEl.textContent = hours[i] + ': ' + cookieCount[i];
+  //   // append that element to the right spot in the document
+  //   var pikeUl = document.getElementById('pike');
+  //   pikeUl.appendChild(liEl);
+  // }
 
 };
+
+
+
+// var alki = {
+//   count: [67, 34, 346, 35, 56, 93, 88],
+//   render: function() {
+//     for (var i = 0; i < this.count.length; i++) {
+//       // create a new HTML element
+//       var liEl = document.createElement('li');
+//       // gitve that element content
+//       liEl.textContent = days[i] + ': ' + this.count[i];
+//       // append that element to the right spot in the DOM
+//       // parentElement.appendChild(childElement);
+//       var alkiUl = document.getElementById('alki');
+//       alkiUl.appendChild(liEl);
+//     }
+//   }
+// };
