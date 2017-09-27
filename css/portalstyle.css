@@ -28,6 +28,7 @@ td {
   background: rgb(186, 150, 87);
 }
 th {
-	background-color: rgb(186, 150, 87);
+	/*background-color: rgb(186, 150, 87);*/
+  background-color: rgba(39, 49, 38, 0.4);
 	color: rgb(25, 15, 3);
 }
