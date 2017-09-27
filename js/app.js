@@ -1,252 +1,149 @@
 'use strict';
 
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+var allStores = [];
+// var combinedCookies = 0; // uncomment once prototype works
+var combinedHourlyCookies = [];
+var storeTable = document.getElementById('stores'); // needed for both header and render functions
 
-var pike = {
-  location: '1st and Pike',
-  minCust: 23,
-  maxCust: 65,
-  cookiesPerCust: 6.3,
-  hourlyCookiesArr: [],
-  dailyCookies: 0,
-
-  custPerHour: function() {
-    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-  },
-  cookiesPerHour: function() {
-    return Math.ceil(this.custPerHour() * this.cookiesPerCust);
-  },
-  hourlyCookiesFun: function() {
-    for (var i = 0; i < hours.length; i++) {
-      this.hourlyCookiesArr.push(this.cookiesPerHour());
-    }
-  },
-  totalCookies: function() {
-    for (var i in this.hourlyCookiesArr) {
-      this.dailyCookies += this.hourlyCookiesArr[i];
-    }
-  },
-  render: function() {
-    for (var i in this.hourlyCookiesArr) {
-      // create a new HTML element
-      var liEl = document.createElement('li');
-      // give that element content
-      liEl.textContent = hours[i] + ': ' + this.hourlyCookiesArr[i] + ' cookies';
-      // append that element to the right spot in the document
-      var pikeUl = document.getElementById('pike');
-      pikeUl.appendChild(liEl);
-    }
-    // create a new HTML element
-    var liEl2 = document.createElement('li');
-    // give that element content
-    liEl2.textContent = 'Total: ' + this.dailyCookies + ' cookies';
-    // append that element to the right spot in the document
-    var pikeUl2 = document.getElementById('pike'); //pikeul@ this is the same parent as in line 36, so declare the first one before for loop
-    pikeUl2.appendChild(liEl2);
-  }
+function Store(location, minCust, maxCust, cookiesPerCust) {
+  this.location = location;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.cookiesPerCust = cookiesPerCust;
+  this.hourlyCookiesArr = [];
+  this.dailyCookies = 0;
+  allStores.push(this);
 };
 
-// where to call the hourlyCookiesFun and totalCookies?? Learn today!
-pike.hourlyCookiesFun();
-pike.totalCookies();
-pike.render();
+new Store('1st and Pike', 23, 65, 6.3);
+new Store('SeaTac Airport', 3, 24, 1.2);
+new Store('Seattle Center', 11, 38, 3,7);
+new Store('Capitol Hill', 20, 38, 2.3);
+new Store('Alki', 2, 16, 4,6);
 
-
-
-var seaTac = {
-  location: 'SeaTac Airport',
-  minCust: 3,
-  maxCust: 24,
-  cookiesPerCust: 1.2,
-  hourlyCookiesArr: [],
-  dailyCookies: 0,
-
-  custPerHour: function() {
-    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-  },
-  cookiesPerHour: function() {
-    return Math.ceil(this.custPerHour() * this.cookiesPerCust);
-  },
-  hourlyCookiesFun: function() {
-    for (var i = 0; i < hours.length; i++) {
-      this.hourlyCookiesArr.push(this.cookiesPerHour());
-    }
-  },
-  totalCookies: function() {
-    for (var i in this.hourlyCookiesArr) {
-      this.dailyCookies += this.hourlyCookiesArr[i];
-    }
-  },
-  render: function() {
-    for (var i in this.hourlyCookiesArr) {
-      // create a new HTML element
-      var liEl = document.createElement('li');
-      // give that element content
-      liEl.textContent = hours[i] + ': ' + this.hourlyCookiesArr[i] + ' cookies';
-      // append that element to the right spot in the document
-      var seaTacUl = document.getElementById('seaTac');
-      seaTacUl.appendChild(liEl);
-    }
-    // create a new HTML element
-    var liEl2 = document.createElement('li');
-    // give that element content
-    liEl2.textContent = 'Total: ' + this.dailyCookies + ' cookies';
-    // append that element to the right spot in the document
-    var seaTacUl2 = document.getElementById('seaTac');
-    seaTacUl2.appendChild(liEl2);
+Store.prototype.custPerHour = function() {
+  return Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
+};
+Store.prototype.cookiesPerHour = function() {
+  return Math.ceil(this.custPerHour() * this.cookiesPerCust);
+};
+Store.prototype.hourlyCookiesPush = function() {
+  for (var i in hours) {
+    this.hourlyCookiesArr.push(this.cookiesPerHour());
   }
 };
-
-seaTac.hourlyCookiesFun();
-seaTac.totalCookies();
-seaTac.render();
-
-
-
-var seaCen = {
-  location: 'Seattle Center',
-  minCust: 11,
-  maxCust: 38,
-  cookiesPerCust: 3.7,
-  hourlyCookiesArr: [],
-  dailyCookies: 0,
-
-  custPerHour: function() {
-    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-  },
-  cookiesPerHour: function() {
-    return Math.ceil(this.custPerHour() * this.cookiesPerCust);
-  },
-  hourlyCookiesFun: function() {
-    for (var i = 0; i < hours.length; i++) {
-      this.hourlyCookiesArr.push(this.cookiesPerHour());
-    }
-  },
-  totalCookies: function() {
-    for (var i in this.hourlyCookiesArr) {
-      this.dailyCookies += this.hourlyCookiesArr[i];
-    }
-  },
-  render: function() {
-    for (var i in this.hourlyCookiesArr) {
-      // create a new HTML element
-      var liEl = document.createElement('li');
-      // give that element content
-      liEl.textContent = hours[i] + ': ' + this.hourlyCookiesArr[i] + ' cookies';
-      // append that element to the right spot in the document
-      var seaCenUl = document.getElementById('seaCen');
-      seaCenUl.appendChild(liEl);
-    }
-    // create a new HTML element
-    var liEl2 = document.createElement('li');
-    // give that element content
-    liEl2.textContent = 'Total: ' + this.dailyCookies + ' cookies';
-    // append that element to the right spot in the document
-    var seaCenUl2 = document.getElementById('seaCen');
-    seaCenUl2.appendChild(liEl2);
+Store.prototype.totalDailyCookies = function() {
+  for (var i in this.hourlyCookiesArr) {
+    this.dailyCookies += this.hourlyCookiesArr[i];
   }
 };
+// convert combine cookies function into sleek ass array next!
+// Store.prototype.combinedCookiesPush = function () {
+//   for (var i in hours) {
+//     combinedHourlyCookies.push(combinedCookies += this.hourlyCookiesArr[i]);
+//   }
+// };
+Store.prototype.render = function() {
+  this.hourlyCookiesPush();
+  this.totalDailyCookies();
+  // this.combinedCookiesPush(); // uncomment after prototype works!
 
-seaCen.hourlyCookiesFun();
-seaCen.totalCookies();
-seaCen.render();
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
 
+  // locations data: create a new row element (done above)
+  // give the column content - create col (done above), give col content (location values), and append col to row
+  tdEl.textContent = this.location;
+  trEl.appendChild(tdEl);
+  // append row to table
+  storeTable.appendChild(trEl);
 
-
-var capHill = {
-  location: 'Capitol Hill',
-  minCust: 20,
-  maxCust: 38,
-  cookiesPerCust: 2.3,
-  hourlyCookiesArr: [],
-  dailyCookies: 0,
-
-  custPerHour: function() {
-    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-  },
-  cookiesPerHour: function() {
-    return Math.ceil(this.custPerHour() * this.cookiesPerCust);
-  },
-  hourlyCookiesFun: function() {
-    for (var i = 0; i < hours.length; i++) {
-      this.hourlyCookiesArr.push(this.cookiesPerHour());
-    }
-  },
-  totalCookies: function() {
-    for (var i in this.hourlyCookiesArr) {
-      this.dailyCookies += this.hourlyCookiesArr[i];
-    }
-  },
-  render: function() {
-    for (var i in this.hourlyCookiesArr) {
-      // create a new HTML element
-      var liEl = document.createElement('li');
-      // give that element content
-      liEl.textContent = hours[i] + ': ' + this.hourlyCookiesArr[i] + ' cookies';
-      // append that element to the right spot in the document
-      var capHillUl = document.getElementById('capHill');
-      capHillUl.appendChild(liEl);
-    }
-    // create a new HTML element
-    var liEl2 = document.createElement('li');
-    // give that element content
-    liEl2.textContent = 'Total: ' + this.dailyCookies + ' cookies';
-    // append that element to the right spot in the document
-    var capHillUl2 = document.getElementById('capHill');
-    capHillUl2.appendChild(liEl2);
+  // hourly cookies data: create new HTML element (done above)
+  // give the column content - create, give content, and append cookie totals array for each hour
+  for (var i in this.hourlyCookiesArr) {
+    tdEl = document.createElement('td');
+    tdEl.textContent = this.hourlyCookiesArr[i] + ' cookies';
+    trEl.appendChild(tdEl);
   }
+  // append row to table
+  storeTable.appendChild(trEl);
 };
 
-capHill.hourlyCookiesFun();
-capHill.totalCookies();
-capHill.render();
-
-
-
-var alki = {
-  location: 'Alki',
-  minCust: 2,
-  maxCust: 16,
-  cookiesPerCust: 4.6,
-  hourlyCookiesArr: [],
-  dailyCookies: 0,
-
-  custPerHour: function() {
-    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-  },
-  cookiesPerHour: function() {
-    return Math.ceil(this.custPerHour() * this.cookiesPerCust);
-  },
-  hourlyCookiesFun: function() {
-    for (var i = 0; i < hours.length; i++) {
-      this.hourlyCookiesArr.push(this.cookiesPerHour());
-    }
-  },
-  totalCookies: function() {
-    for (var i in this.hourlyCookiesArr) {
-      this.dailyCookies += this.hourlyCookiesArr[i];
-    }
-  },
-  render: function() {
-    for (var i in this.hourlyCookiesArr) {
-      // create a new HTML element
-      var liEl = document.createElement('li');
-      // give that element content
-      liEl.textContent = hours[i] + ': ' + this.hourlyCookiesArr[i] + ' cookies';
-      // append that element to the right spot in the document
-      var alkiUl = document.getElementById('alki');
-      alkiUl.appendChild(liEl);
-    }
-    // create a new HTML element
-    var liEl2 = document.createElement('li');
-    // give that element content
-    liEl2.textContent = 'Total: ' + this.dailyCookies + ' cookies';
-    // append that element to the right spot in the document
-    var alkiUl2 = document.getElementById('alki');
-    alkiUl2.appendChild(liEl2);
+// function for header
+function displayHeader() {
+  // heading: create a tr
+  var trEl = document.createElement('tr');
+  // create, give content, and append header for empty column (correctly aligns hours)
+  var thEl = document.createElement('th');
+  thEl.textContent = '';
+  trEl.appendChild(thEl);
+  // create, give content, and append header for each hour
+  for (var i in hours){
+    var thEl = document.createElement('th');
+    thEl.textContent = hours[i];
+    trEl.appendChild(thEl);
   }
-};
+  // append row to the table
+  storeTable.appendChild(trEl);
+}
 
-alki.hourlyCookiesFun();
-alki.totalCookies();
-alki.render();
+
+// loop in function to invoke the render method on all locations
+function displayCookieData() {
+  for (var i in allStores) {
+    allStores[i].render();
+  }
+}
+
+// function to add the total cookies of each hour for each location
+function combineCookies() {
+  for (var i in hours) {
+    combinedHourlyCookies.push(allStores[0].hourlyCookiesArr[i] + allStores[1].hourlyCookiesArr[i] + allStores[2].hourlyCookiesArr[i] + allStores[3].hourlyCookiesArr[i] + allStores[4].hourlyCookiesArr[i]);
+  }
+}
+
+// function for total footer (hourly totals for all 5 stores data)
+function displayTotalsFooter() {
+  // heading: create a tr
+  var trEl = document.createElement('tr');
+  // create, give content, and append header for 'Totals' cell (correctly align hourly totals for all 5 stores)
+  var tdEl = document.createElement('td');
+  tdEl.textContent = 'Totals';
+  trEl.appendChild(tdEl);
+  // create new row (done above)
+  // give the column content - create, give content, and append cookie totals array for each hour
+  for (var i in hours) {
+    var tdEl = document.createElement('td');
+    tdEl.textContent = combinedHourlyCookies[i] + ' cookies';
+    trEl.appendChild(tdEl);
+  }
+  // append row to table
+  storeTable.appendChild(trEl);
+}
+
+// MAKE THIS DISPLAY AS A COLUMN ON THE FAR RIGHT, THEN TOTAL ALL THE TOTALS AND ADD A CELL TO DISPLAY THAT!
+// function for daily location totals
+function dailyLocationTotals() {
+  // create a new HTML element
+  var trEl = document.createElement('tr');
+  // give the column content - create, content, and append 'Daily Location Totals' title to cell
+  var tdEl = document.createElement('td');
+  tdEl.textContent = 'Daily Location Totals';
+  trEl.appendChild(tdEl);
+  // give the column content - create (done above), content, and append daily total values to row
+  for (var i in allStores) {
+    var tdEl = document.createElement('td');
+    tdEl.textContent = allStores[i].dailyCookies + ' cookies';
+    trEl.appendChild(tdEl);
+  }
+  // append row to table
+  storeTable.appendChild(trEl);
+}
+
+
+displayHeader();
+displayCookieData();
+combineCookies(); // remove this and related function after prototype works!
+displayTotalsFooter();
+dailyLocationTotals();
