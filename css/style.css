@@ -4,8 +4,16 @@
 
 body {
   background-color: rgb(169, 86, 52);
+  /*background-image: url(../images/main.jpg);*/
+  /*background-repeat: no-repeat;*/
+  /*background-attachment: fixed;*/
+  /*opacity: 0.3;*/
   color: rgb(25, 15, 3);
   font-size: 18px;
+}
+
+nav {
+  background-color: rgb(169, 86, 52);
 }
 
 #logo{
@@ -45,7 +53,8 @@ background image attribution: https://www.flickr.com/photos/53532879@N07/1046020
 /*main background for all h2s or make others besides first after nav tan color: rgb(186, 150, 87);? */
 main {
   background-image: url(../images/main.jpg);
-  opacity: 0.5;
+  background-attachment: fixed;
+  /*opacity: 0.3;*/
 }
 
 h2 {
@@ -57,6 +66,12 @@ h2 {
 /*Location list displays to the left of the map*/
 /*li {
   display: inline;*/
+}
+
+/*.locations {
+  background-image: url(../images/main.jpg);
+  background-attachment: fixed;
+  /*opacity: 0.3;*/*/
 }
 
 iframe {

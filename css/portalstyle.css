@@ -2,12 +2,28 @@ body {
   background-color: rgb(169, 86, 52);
   color: rgb(25, 15, 3);
 }
+
+a:link {
+  color: rgb(25, 15, 3);
+  text-decoration: none;
+  font-size: 20px;
+}
+
+a:visited {
+  color: rgb(25, 15, 3);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(186, 150, 87);
+}
+
 table {
 	border: 3px solid rgb(25, 15, 3);
 }
 td {
 	padding: 10px;
-	border-radius: 15px;
+	border-radius: 5px;
   border: 1px solid rgb(25, 15, 3);
   background: rgb(186, 150, 87);
 }
