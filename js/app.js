@@ -88,12 +88,6 @@ function displayHeader() {
   storeTable.appendChild(trEl);
 }
 
-// // daily total cookies data: create a new HTML element (done above)
-// // give the column content - create (done above), content, and append daily total values to row
-// tdEl.textContent = this.dailyCookies + ' cookies/day';
-// trEl.appendChild(tdEl);
-// // append row to table
-// storeTable.appendChild(trEl);
 
 // loop in function to invoke the render method on all locations
 function displayCookieData() {
@@ -128,7 +122,28 @@ function displayTotalsFooter() {
   storeTable.appendChild(trEl);
 }
 
+// MAKE THIS DISPLAY AS A COLUMN ON THE FAR RIGHT, THEN TOTAL ALL THE TOTALS AND ADD A CELL TO DISPLAY THAT!
+// function for daily location totals
+function dailyLocationTotals() {
+  // create a new HTML element
+  var trEl = document.createElement('tr');
+  // give the column content - create, content, and append 'Daily Location Totals' title to cell
+  var tdEl = document.createElement('td');
+  tdEl.textContent = 'Daily Location Totals';
+  trEl.appendChild(tdEl);
+  // give the column content - create (done above), content, and append daily total values to row
+  for (var i in allStores) {
+    var tdEl = document.createElement('td');
+    tdEl.textContent = allStores[i].dailyCookies + ' cookies';
+    trEl.appendChild(tdEl);
+  }
+  // append row to table
+  storeTable.appendChild(trEl);
+}
+
+
 displayHeader();
 displayCookieData();
 combineCookies(); // remove this and related function after prototype works!
 displayTotalsFooter();
+dailyLocationTotals();
