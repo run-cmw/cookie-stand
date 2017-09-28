@@ -2,6 +2,10 @@
   /*border: 1px solid black;*/
 }
 
+/*make layout liquid pg 382, 385*/
+/*fixed positioning pg 364, 368*/
+/*column for location section pg 375*/
+
 body {
   background-color: rgb(169, 86, 52);
   /*background-image: url(../images/main.jpg);*/
@@ -21,8 +25,12 @@ nav {
 }
 
 #navigation {
-  /*position: fixed;*/
-  background-color: rgba(39, 49, 38, 0.3);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  /*z-index: 10;*/
+  background-color: rgba(39, 49, 38, 0.7);
   padding: 20px 30px;
 }
 
