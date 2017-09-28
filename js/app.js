@@ -32,7 +32,6 @@ Store.prototype.totalDailyCookies = function() {
     this.dailyCookies += this.hourlyCookiesArr[i];
   }
 };
-
 Store.prototype.render = function() {
   this.hourlyCookiesPush(); // these invocations can't be last b/c this method depends on them
   this.totalDailyCookies();
@@ -123,7 +122,7 @@ function displayTotalsFooter() {
   var trEl = document.createElement('tr');
   // create, give content, and append header for 'Totals' cell (correctly align hourly totals for all 5 stores)
   var thEl = document.createElement('th');
-  thEl.textContent = 'Totals';
+  thEl.textContent = 'Total';
   trEl.appendChild(thEl);
   // give the column content - create, give content, and append cookie totals array for each hour
   for (var i = 0; i < hours.length; i++) {
