@@ -6,7 +6,7 @@ body {
 a:link {
   color: rgb(25, 15, 3);
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 a:visited {
@@ -18,17 +18,44 @@ a:hover {
   color: rgb(186, 150, 87);
 }
 
+fieldset {
+  margin: 30px 0px;
+  border: 3px dotted rgb(186, 150, 87);
+  border-radius: 5px;
+  color: rgb(39, 49, 38);
+  font-size: 18px;
+}
+
+legend {
+  font-weight: bold;
+}
+
+input {
+  margin: 5px 0px;
+  margin-right: 40px;
+  border-radius: 5px;
+}
+
+input#submit {
+  background-color: rgb(186, 150, 87);
+}
+
+p {
+  display: inline;
+}
+
 table {
 	border: 3px solid rgb(25, 15, 3);
 }
+
 td {
-	padding: 10px;
-	border-radius: 5px;
   border: 1px solid rgb(25, 15, 3);
+  border-radius: 5px;
+	padding: 10px;
   background: rgb(186, 150, 87);
 }
+
 th {
-	/*background-color: rgb(186, 150, 87);*/
   background-color: rgba(39, 49, 38, 0.4);
 	color: rgb(25, 15, 3);
 }
