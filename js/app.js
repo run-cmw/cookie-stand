@@ -2,8 +2,7 @@
 
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 var allStores = [];
-// var combinedCookies = 0; // uncomment once prototype works -- also in render method and prototype I began
-var combinedHourlyCookies = []; // displayed on bottom row
+var combinedHourlyCookies = []; // bottom row
 var totalTotal = 0; // bottom right cell
 var storeTable = document.getElementById('stores'); // global because needed for render method and header and footer functions
 
@@ -33,36 +32,32 @@ Store.prototype.totalDailyCookies = function() {
     this.dailyCookies += this.hourlyCookiesArr[i];
   }
 };
-// convert combine cookies function into sleek ass array next!
-// Store.prototype.combinedCookiesPush = function () {
-//   for (var i in hours) {
-//     combinedHourlyCookies.push(combinedCookies += this.hourlyCookiesArr[i]);
-//   }
-// };
+
 Store.prototype.render = function() {
-  this.hourlyCookiesPush();
+  this.hourlyCookiesPush(); // these invocations can't be last b/c this method depends on them
   this.totalDailyCookies();
-  // this.combinedCookiesPush(); //uncomment after prototype works! -- these calls can't be last b/c this method depends on them
+
   var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
   var tdEl = document.createElement('td');
 
   // locations data: create a new row element (done above)
   // give the column content - create col (done above), give col content (location values), and append col to row
-  tdEl.textContent = this.location;
-  trEl.appendChild(tdEl);
+  thEl.textContent = this.location;
+  trEl.appendChild(thEl);
   // append row to table
   storeTable.appendChild(trEl);
 
   // hourly cookies data: give the column content - create, give content, and append cookie totals array for each hour
-  for (var i in this.hourlyCookiesArr) {
+  for (var i = 0; i < this.hourlyCookiesArr.length; i++) {
     tdEl = document.createElement('td');
     tdEl.textContent = this.hourlyCookiesArr[i] + ' cookies';
     trEl.appendChild(tdEl);
   }
   // daily totals column: create, content, and append daily total values to row
-  tdEl = document.createElement('td');
-  tdEl.textContent = this.dailyCookies + ' cookies';
-  trEl.appendChild(tdEl);
+  thEl = document.createElement('th');
+  thEl.textContent = this.dailyCookies + ' cookies';
+  trEl.appendChild(thEl);
   // append row to table
   storeTable.appendChild(trEl);
 };
@@ -102,10 +97,14 @@ function displayCookieData() {
   }
 }
 
-// function to add the total cookies of each hour for each location // MAKE THIS A LOOP?????
+// function to add the total cookies of each hour for every location
 function combineCookies() {
   for (var i = 0; i < hours.length; i++) {
-    combinedHourlyCookies.push(allStores[0].hourlyCookiesArr[i] + allStores[1].hourlyCookiesArr[i] + allStores[2].hourlyCookiesArr[i] + allStores[3].hourlyCookiesArr[i] + allStores[4].hourlyCookiesArr[i]);
+    var combinedCookies = 0;
+    for (var j = 0; j < allStores.length; j++) {
+      combinedCookies += allStores[j].hourlyCookiesArr[i];
+    }
+    combinedHourlyCookies.push(combinedCookies);
   }
 }
 
@@ -118,7 +117,7 @@ function displayTotalTotal() {
 
 // function for total footer (hourly totals for all 5 stores data)
 function displayTotalsFooter() {
-  displayTotalTotal(); // these calls can't be last b/c this function depends on them
+  displayTotalTotal(); // theis calls can't be last b/c this function depends on them
 
   // heading: create a row
   var trEl = document.createElement('tr');
@@ -142,5 +141,5 @@ function displayTotalsFooter() {
 
 displayHeader();
 displayCookieData();
-combineCookies(); // remove this and related function after prototype works!
+combineCookies();
 displayTotalsFooter();
