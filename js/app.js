@@ -5,6 +5,8 @@ var allStores = [];
 var combinedHourlyCookies = []; // bottom row
 var totalTotal = 0; // bottom right cell
 var storeTable = document.getElementById('stores'); // global because needed for render method and header and footer functions
+var addForm = document.getElementById('add-stores'); // variable to access add form
+var removeForm = document.getElementById('remove-stores'); // variable to access remove form
 
 function Store(location, minCust, maxCust, cookiesPerCust) {
   this.location = location;
@@ -137,6 +139,39 @@ function displayTotalsFooter() {
   // append row to table
   storeTable.appendChild(trEl);
 }
+
+// FUNCTION TO RENDER NEW TABLE???!!!
+
+// event handler
+function handleAddSubmit(event) {
+  console.log(event.target.location.value);
+  console.log(event.target.min.value);
+  console.log(event.target.max.value);
+  console.log(event.target.cookies.value);
+
+  event.preventDefault();
+
+  // INPUT VALIDATION HERE AT SOME POINT
+
+
+  var location = event.target.location.value;
+  var min = event.target.min.value;
+  var max = event.target.max.value;
+  var cookiesPurchased = event.target.cookies.value;
+
+  var newStore = new Store (location, min, max, cookiesPurchased);
+
+  allStores.push(newStore);
+  console.log(allStores);
+
+  // RENDER TABLE ALL OVER AGAIN? HOOOOWWW??!!! Just invoke my render prototype method?
+
+  // CLEAR INPUT FORM WHEN I RENDER TABLE?
+}
+
+//event listener
+addForm.addEventListener('submit', handleAddSubmit);
+// removeForm.addEventListener('submit', ________);
 
 displayHeader();
 displayCookieData();

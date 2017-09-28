@@ -22,7 +22,8 @@ fieldset {
   margin-bottom: 30px;
   border: 3px dotted rgb(186, 150, 87);
   border-radius: 5px;
-  color: rgb(39, 49, 38);
+  /*color: rgb(39, 49, 38);*/
+  color: color: rgb(25, 15, 3);
   font-size: 18px;
 }
 
@@ -45,6 +46,7 @@ p {
 }
 
 table {
+  margin-bottom: 10px;
 	border: 3px solid rgb(25, 15, 3);
 }
 
