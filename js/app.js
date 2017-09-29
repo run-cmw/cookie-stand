@@ -5,6 +5,9 @@ var allStores = [];
 var combinedHourlyCookies = []; // bottom row
 var totalTotal = 0; // bottom right cell
 var storeTable = document.getElementById('stores'); // global because needed for render method and header and footer functions
+var addForm = document.getElementById('add-stores'); // variable to access form that adds stores
+var removeForm = document.getElementById('remove-stores'); // variable to access form that removes stores
+var executables = []; // array of executable functions
 
 function Store(location, minCust, maxCust, cookiesPerCust) {
   this.location = location;
@@ -14,6 +17,8 @@ function Store(location, minCust, maxCust, cookiesPerCust) {
   this.hourlyCookiesArr = [];
   this.dailyCookies = 0;
   allStores.push(this);
+  this.hourlyCookiesPush();
+  this.totalDailyCookies();
 };
 
 Store.prototype.custPerHour = function() {
@@ -32,11 +37,7 @@ Store.prototype.totalDailyCookies = function() {
     this.dailyCookies += this.hourlyCookiesArr[i];
   }
 };
-
 Store.prototype.render = function() {
-  this.hourlyCookiesPush(); // these invocations can't be last b/c this method depends on them
-  this.totalDailyCookies();
-
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
   var tdEl = document.createElement('td');
@@ -89,6 +90,7 @@ function displayHeader() {
   // append row to the table
   storeTable.appendChild(trEl);
 }
+executables.push(displayHeader());
 
 // function with loop to invoke the render method on all locations
 function displayCookieData() {
@@ -96,6 +98,7 @@ function displayCookieData() {
     allStores[i].render();
   }
 }
+executables.push(displayCookieData());
 
 // function to add the total cookies of each hour for every location
 function combineCookies() {
@@ -107,6 +110,7 @@ function combineCookies() {
     combinedHourlyCookies.push(combinedCookies);
   }
 }
+executables.push(combineCookies());
 
 // function for bottom right cell
 function displayTotalTotal() {
@@ -117,13 +121,13 @@ function displayTotalTotal() {
 
 // function for total footer (hourly totals for all 5 stores data)
 function displayTotalsFooter() {
-  displayTotalTotal(); // theis calls can't be last b/c this function depends on them
+  displayTotalTotal(); // this call can't be last b/c the outer function depends on them
 
   // heading: create a row
   var trEl = document.createElement('tr');
   // create, give content, and append header for 'Totals' cell (correctly align hourly totals for all 5 stores)
   var thEl = document.createElement('th');
-  thEl.textContent = 'Totals';
+  thEl.textContent = 'Total';
   trEl.appendChild(thEl);
   // give the column content - create, give content, and append cookie totals array for each hour
   for (var i = 0; i < hours.length; i++) {
@@ -138,8 +142,49 @@ function displayTotalsFooter() {
   // append row to table
   storeTable.appendChild(trEl);
 }
+executables.push(displayTotalsFooter());
 
-displayHeader();
-displayCookieData();
-combineCookies();
-displayTotalsFooter();
+// function to invoke all executables
+function executeAll() {
+  for (var i = 0; i < executables.length; i++) {
+    executables[i];
+  }
+}
+
+// event handler
+function handleAddSubmit(event) {
+
+  event.preventDefault();
+
+  // INPUT VALIDATION HERE AT SOME POINT
+
+  var location = event.target.location.value;
+  var min = event.target.min.value;
+  var max = event.target.max.value;
+  var cookiesPurchased = event.target.cookies.value;
+
+  new Store (location, min, max, cookiesPurchased);
+  console.log(allStores);
+  displayHeader();
+  displayCookieData();
+  combineCookies();
+  displayTotalsFooter();
+
+  // executeAll();
+}
+
+//event listeners
+addForm.addEventListener('click', function() { // clear form after submission
+  event.target.location.value = null;
+  event.target.min.value = null;
+  event.target.max.value = null;
+  event.target.cookies.value = null;
+  console.log(allStores);
+  allStores = [];
+  // storeTable.innerHTML = null;
+});
+
+addForm.addEventListener('submit', handleAddSubmit);
+// removeForm.addEventListener('submit', ________);
+
+executeAll();
