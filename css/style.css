@@ -30,7 +30,7 @@ header {
 
 .nav {
   display: inline;
-  margin: 20px 50px;
+  margin: 20px 40px;
   font-size: 20px;
 }
 
@@ -58,26 +58,27 @@ main {
   /*opacity: 0.3;*/
 }
 
+p {
+  width: 50%;
+}
+
 h2 {
   background-color: rgba(39, 49, 38, 0.4);
   padding: 20px 30px;
 }
 
 /*Location list displays to the left of the map*/
-/*li {
-  display: inline;*/
+.stores {
+  margin: 0 auto;
 }
 
-/*.locations {
-  background-image: url(../images/main.jpg);
-  background-attachment: fixed;
-  /*opacity: 0.3;*/*/
+
+.image {
+  margin: 0px 20px;
+  height: 300px;
+  width: 400px;
 }
 
-iframe {
-  width: 640px;
-  height: 480px;
-  margin: 20px;
-  /*float: right;  */
-  /*does my css on iframe not work?*/
+li {
+  display: inline-block;
 }

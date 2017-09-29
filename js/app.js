@@ -6,7 +6,7 @@ var combinedHourlyCookies = []; // bottom row
 var totalTotal = 0; // bottom right cell
 var storeTable = document.getElementById('stores'); // global because needed for render method and header and footer functions
 var addForm = document.getElementById('add-stores'); // variable to access form that adds stores
-var removeForm = document.getElementById('remove-stores'); // variable to access form that removes stores
+// var removeForm = document.getElementById('remove-stores'); // variable to access form that removes stores
 var executables = []; // array of executable functions
 
 function Store(location, minCust, maxCust, cookiesPerCust) {
