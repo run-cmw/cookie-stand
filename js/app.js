@@ -75,7 +75,7 @@ function displayHeader() {
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
   // create, give content, and append header for store locations cell (correctly aligns hours)
-  thEl.textContent = 'Store Locations';
+  thEl.textContent = '';
   trEl.appendChild(thEl);
   // create, give content, and append header for each hour
   for (var i = 0; i < hours.length; i++){
@@ -85,7 +85,7 @@ function displayHeader() {
   }
   // give the column content - create header, content, and append 'Daily Location Totals' title to cell
   thEl = document.createElement('th');
-  thEl.textContent = 'Daily Location Totals';
+  thEl.textContent = 'Location Totals';
   trEl.appendChild(thEl);
   // append row to the table
   storeTable.appendChild(trEl);

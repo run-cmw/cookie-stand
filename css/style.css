@@ -7,41 +7,30 @@
 /*column for location section pg 375*/
 
 body {
-  margin-top: 200px;
+  margin-top: 150px;
   background-color: rgb(169, 86, 52);
-  /*background-image: url(../images/main.jpg);*/
-  /*background-repeat: no-repeat;*/
-  /*background-attachment: fixed;*/
-  /*opacity: 0.3;*/
   color: rgb(25, 15, 3);
-  font-size: 18px;
 }
 
 nav {
   position: fixed;
-  z-index: 5;
   top: 0px;
   left: 200px;
   width: 70%;
   background-color: rgba(39, 49, 38, 0.5);
   padding: 20px 30px;
-  /*background-color: rgb(169, 86, 52);*/
 }
 
 header {
   position: fixed;
-  top: -50px;
+  top: -35px;
   left: 0px;
   width: 100%;
 }
 
-#logo{
-  /
-}
-
 .nav {
   display: inline;
-  margin: 20px 70px;
+  margin: 20px 50px;
   font-size: 20px;
 }
 
@@ -70,7 +59,6 @@ main {
 }
 
 h2 {
-  /*position: fixed;*/
   background-color: rgba(39, 49, 38, 0.4);
   padding: 20px 30px;
 }
