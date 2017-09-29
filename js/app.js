@@ -140,19 +140,19 @@ function displayTotalsFooter() {
   storeTable.appendChild(trEl);
 }
 
-// FUNCTION TO RENDER NEW TABLE???!!!
+// function to invoke all executables
+function executeAll() {
+  for (var i = 0; i < executables.length; i++) {
+    executables[i];
+  }
+}
 
 // event handler
 function handleAddSubmit(event) {
-  console.log(event.target.location.value);
-  console.log(event.target.min.value);
-  console.log(event.target.max.value);
-  console.log(event.target.cookies.value);
 
   event.preventDefault();
 
   // INPUT VALIDATION HERE AT SOME POINT
-
 
   var location = event.target.location.value;
   var min = event.target.min.value;
@@ -161,19 +161,37 @@ function handleAddSubmit(event) {
 
   var newStore = new Store (location, min, max, cookiesPurchased);
 
+  // for (var i = 0; i < allStores.length; i++) {
+  //   allStores[i].render();
+  // }
+  //
+  // displayTotalsFooter();
+
   allStores.push(newStore);
   console.log(allStores);
 
   // RENDER TABLE ALL OVER AGAIN? HOOOOWWW??!!! Just invoke my render prototype method?
 
-  // CLEAR INPUT FORM WHEN I RENDER TABLE?
+  // clear form after submission
+  // event.target.location.value = null;
+  // event.target.min.value = null;
+  // event.target.max.value = null;
+  // event.target.cookies.value = null;
 }
 
 //event listener
 addForm.addEventListener('submit', handleAddSubmit);
+// addForm.addEventListener('submit', function() {
+//   event.target.location.value = null;
+//   event.target.min.value = null;
+//   event.target.max.value = null;
+//   event.target.cookies.value = null;
+//   allStores = [];
+// });
 // removeForm.addEventListener('submit', ________);
 
-displayHeader();
-displayCookieData();
-combineCookies();
-displayTotalsFooter();
+var executables = [displayHeader(), displayCookieData(), combineCookies(), displayTotalsFooter()];
+
+
+
+executeAll();
