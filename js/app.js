@@ -17,6 +17,8 @@ function Store(location, minCust, maxCust, cookiesPerCust) {
   this.hourlyCookiesArr = [];
   this.dailyCookies = 0;
   allStores.push(this);
+  this.hourlyCookiesPush();
+  this.totalDailyCookies();
 };
 
 Store.prototype.custPerHour = function() {
@@ -36,9 +38,6 @@ Store.prototype.totalDailyCookies = function() {
   }
 };
 Store.prototype.render = function() {
-  this.hourlyCookiesPush(); // these invocations can't be last b/c this method depends on them
-  this.totalDailyCookies();
-
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
   var tdEl = document.createElement('td');
@@ -165,27 +164,27 @@ function handleAddSubmit(event) {
   var cookiesPurchased = event.target.cookies.value;
 
   new Store (location, min, max, cookiesPurchased);
-
   console.log(allStores);
+  displayHeader();
+  displayCookieData();
+  combineCookies();
+  displayTotalsFooter();
 
-  // clear form after submission
-  // event.target.location.value = null;
-  // event.target.min.value = null;
-  // event.target.max.value = null;
-  // event.target.cookies.value = null;
-
+  // executeAll();
 }
 
-//event listener
+//event listeners
+addForm.addEventListener('click', function() { // clear form after submission
+  event.target.location.value = null;
+  event.target.min.value = null;
+  event.target.max.value = null;
+  event.target.cookies.value = null;
+  console.log(allStores);
+  allStores = [];
+  // storeTable.innerHTML = null;
+});
+
 addForm.addEventListener('submit', handleAddSubmit);
-// addForm.addEventListener('submit', function() {
-//   event.target.location.value = null;
-//   event.target.min.value = null;
-//   event.target.max.value = null;
-//   event.target.cookies.value = null;
-//   allStores = [];
-//   storeTable.textContent = null;
-// });
 // removeForm.addEventListener('submit', ________);
 
 executeAll();
