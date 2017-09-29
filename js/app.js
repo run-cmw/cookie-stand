@@ -5,8 +5,9 @@ var allStores = [];
 var combinedHourlyCookies = []; // bottom row
 var totalTotal = 0; // bottom right cell
 var storeTable = document.getElementById('stores'); // global because needed for render method and header and footer functions
-var addForm = document.getElementById('add-stores'); // variable to access add form
-var removeForm = document.getElementById('remove-stores'); // variable to access remove form
+var addForm = document.getElementById('add-stores'); // variable to access form that adds stores
+var removeForm = document.getElementById('remove-stores'); // variable to access form that removes stores
+var executables = []; // array of executable functions
 
 function Store(location, minCust, maxCust, cookiesPerCust) {
   this.location = location;
@@ -90,6 +91,7 @@ function displayHeader() {
   // append row to the table
   storeTable.appendChild(trEl);
 }
+executables.push(displayHeader());
 
 // function with loop to invoke the render method on all locations
 function displayCookieData() {
@@ -97,6 +99,7 @@ function displayCookieData() {
     allStores[i].render();
   }
 }
+executables.push(displayCookieData());
 
 // function to add the total cookies of each hour for every location
 function combineCookies() {
@@ -108,6 +111,7 @@ function combineCookies() {
     combinedHourlyCookies.push(combinedCookies);
   }
 }
+executables.push(combineCookies());
 
 // function for bottom right cell
 function displayTotalTotal() {
@@ -118,7 +122,7 @@ function displayTotalTotal() {
 
 // function for total footer (hourly totals for all 5 stores data)
 function displayTotalsFooter() {
-  displayTotalTotal(); // theis calls can't be last b/c this function depends on them
+  displayTotalTotal(); // this call can't be last b/c the outer function depends on them
 
   // heading: create a row
   var trEl = document.createElement('tr');
@@ -139,6 +143,7 @@ function displayTotalsFooter() {
   // append row to table
   storeTable.appendChild(trEl);
 }
+executables.push(displayTotalsFooter());
 
 // function to invoke all executables
 function executeAll() {
@@ -159,24 +164,16 @@ function handleAddSubmit(event) {
   var max = event.target.max.value;
   var cookiesPurchased = event.target.cookies.value;
 
-  var newStore = new Store (location, min, max, cookiesPurchased);
+  new Store (location, min, max, cookiesPurchased);
 
-  // for (var i = 0; i < allStores.length; i++) {
-  //   allStores[i].render();
-  // }
-  //
-  // displayTotalsFooter();
-
-  allStores.push(newStore);
   console.log(allStores);
-
-  // RENDER TABLE ALL OVER AGAIN? HOOOOWWW??!!! Just invoke my render prototype method?
 
   // clear form after submission
   // event.target.location.value = null;
   // event.target.min.value = null;
   // event.target.max.value = null;
   // event.target.cookies.value = null;
+
 }
 
 //event listener
@@ -187,11 +184,8 @@ addForm.addEventListener('submit', handleAddSubmit);
 //   event.target.max.value = null;
 //   event.target.cookies.value = null;
 //   allStores = [];
+//   storeTable.textContent = null;
 // });
 // removeForm.addEventListener('submit', ________);
-
-var executables = [displayHeader(), displayCookieData(), combineCookies(), displayTotalsFooter()];
-
-
 
 executeAll();
