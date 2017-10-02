@@ -104,7 +104,7 @@ function combineCookies() {
 
 // function for bottom right cell
 function calcTotalTotal() {
-  // totalTotal = 0;
+  totalTotal = 0;
   for (var i = 0; i < hours.length; i++) {
     totalTotal += combinedHourlyCookies[i];
   }
