@@ -12,6 +12,13 @@ body {
   color: rgb(25, 15, 3);
 }
 
+header {
+  position: fixed;
+  top: -35px;
+  left: 0px;
+  width: 100%;
+}
+
 nav {
   position: fixed;
   top: 0px;
@@ -21,15 +28,12 @@ nav {
   padding: 20px 30px;
 }
 
-header {
-  position: fixed;
-  top: -35px;
-  left: 0px;
-  width: 100%;
+nav ul {
+  height: 50px;
 }
 
-.nav {
-  display: inline;
+nav ul li {
+  display: inline-block;
   margin: 20px 40px;
   font-size: 20px;
 }

@@ -5,9 +5,8 @@ var allStores = [];
 var combinedHourlyCookies = []; // bottom row
 var totalTotal = 0; // bottom right cell
 var storeTable = document.getElementById('stores'); // global because needed for render method and header and footer functions
-var addForm = document.getElementById('add-stores'); // variable to access form that adds stores
-// var removeForm = document.getElementById('remove-stores'); // variable to access form that removes stores
-var executables = []; // array of executable functions
+var addForm = document.getElementById('add-stores'); // variable to access HTML form that adds stores
+// var removeForm = document.getElementById('remove-stores'); // variable to access HTML form that removes stores
 
 function Store(location, minCust, maxCust, cookiesPerCust) {
   this.location = location;
@@ -17,8 +16,6 @@ function Store(location, minCust, maxCust, cookiesPerCust) {
   this.hourlyCookiesArr = [];
   this.dailyCookies = 0;
   allStores.push(this);
-  this.hourlyCookiesPush();
-  this.totalDailyCookies();
 };
 
 Store.prototype.custPerHour = function() {
@@ -37,29 +34,31 @@ Store.prototype.totalDailyCookies = function() {
     this.dailyCookies += this.hourlyCookiesArr[i];
   }
 };
-Store.prototype.render = function() {
+Store.prototype.renderTable = function() {
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
   var tdEl = document.createElement('td');
 
-  // locations data: create a new row element (done above)
-  // give the column content - create col (done above), give col content (location values), and append col to row
+  // locations data
+  trEl = document.createElement('tr');
+  // give the column content - create col, give col content (location values), and append col to row
+  tdEl = document.createElement('td');
   thEl.textContent = this.location;
   trEl.appendChild(thEl);
   // append row to table
   storeTable.appendChild(trEl);
 
-  // hourly cookies data: give the column content - create, give content, and append cookie totals array for each hour
+  // hourly cookies data
   for (var i = 0; i < this.hourlyCookiesArr.length; i++) {
     tdEl = document.createElement('td');
     tdEl.textContent = this.hourlyCookiesArr[i] + ' cookies';
     trEl.appendChild(tdEl);
   }
-  // daily totals column: create, content, and append daily total values to row
+  // daily totals column
   thEl = document.createElement('th');
   thEl.textContent = this.dailyCookies + ' cookies';
   trEl.appendChild(thEl);
-  // append row to table
+
   storeTable.appendChild(trEl);
 };
 
@@ -71,10 +70,11 @@ new Store('Alki', 2, 16, 4,6);
 
 // function for header
 function displayHeader() {
-  // heading: create a row
+  // create a row
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
-  // create, give content, and append header for store locations cell (correctly aligns hours)
+  // blank cell (correctly aligns hours)
+  trEl = document.createElement('tr');
   thEl.textContent = '';
   trEl.appendChild(thEl);
   // create, give content, and append header for each hour
@@ -83,22 +83,13 @@ function displayHeader() {
     thEl.textContent = hours[i];
     trEl.appendChild(thEl);
   }
-  // give the column content - create header, content, and append 'Daily Location Totals' title to cell
+  // 'Location Totals' title to cell
   thEl = document.createElement('th');
   thEl.textContent = 'Location Totals';
   trEl.appendChild(thEl);
-  // append row to the table
+
   storeTable.appendChild(trEl);
 }
-executables.push(displayHeader());
-
-// function with loop to invoke the render method on all locations
-function displayCookieData() {
-  for (var i = 0; i < allStores.length; i++) {
-    allStores[i].render();
-  }
-}
-executables.push(displayCookieData());
 
 // function to add the total cookies of each hour for every location
 function combineCookies() {
@@ -110,7 +101,6 @@ function combineCookies() {
     combinedHourlyCookies.push(combinedCookies);
   }
 }
-executables.push(combineCookies());
 
 // function for bottom right cell
 function displayTotalTotal() {
@@ -142,13 +132,17 @@ function displayTotalsFooter() {
   // append row to table
   storeTable.appendChild(trEl);
 }
-executables.push(displayTotalsFooter());
 
 // function to invoke all executables
 function executeAll() {
-  for (var i = 0; i < executables.length; i++) {
-    executables[i];
+  displayHeader();
+  for (var i = 0; i < allStores.length; i++) {
+    allStores[i].hourlyCookiesPush();
+    allStores[i].totalDailyCookies();
+    allStores[i].renderTable();
   }
+  combineCookies();
+  displayTotalsFooter();
 }
 
 // event handler
@@ -156,34 +150,38 @@ function handleAddSubmit(event) {
 
   event.preventDefault();
 
-  // INPUT VALIDATION HERE AT SOME POINT
-
   var location = event.target.location.value;
   var min = event.target.min.value;
   var max = event.target.max.value;
   var cookiesPurchased = event.target.cookies.value;
 
+  // input validation
+  if (isNaN(min) || isNaN(max) || isNaN(cookiesPurchased)) {
+    alert('Please only enter numbers for minimum customers, maximum customers, and average cookies purchased.');
+    return;
+  } else if (min > max) {
+    alert('Minimum customers per hour must be less than or equal to maximum customers per hour.');
+    return;
+  } else if (min < 0 || max < 0 || cookiesPurchased < 0) {
+    alert('Please enter 0 or higher for minimum customers, maximum customers, and average cookies purchased.');
+    return;
+  }
+
+
+  console.log(allStores);
+  event.target.location.value = ''; // clear form fields
+  event.target.min.value = '';
+  event.target.max.value = '';
+  event.target.cookies.value = '';
+  stores.innerHTML = ''; // clear table conent
+
   new Store (location, min, max, cookiesPurchased);
   console.log(allStores);
-  displayHeader();
-  displayCookieData();
-  combineCookies();
-  displayTotalsFooter();
 
-  // executeAll();
+  executeAll();
 }
 
 //event listeners
-addForm.addEventListener('click', function() { // clear form after submission
-  event.target.location.value = null;
-  event.target.min.value = null;
-  event.target.max.value = null;
-  event.target.cookies.value = null;
-  console.log(allStores);
-  allStores = [];
-  // storeTable.innerHTML = null;
-});
-
 addForm.addEventListener('submit', handleAddSubmit);
 // removeForm.addEventListener('submit', ________);
 
