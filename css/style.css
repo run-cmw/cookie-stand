@@ -1,15 +1,14 @@
-* {
-  /*border: 1px solid black;*/
-}
-
-/*make layout liquid pg 382, 385*/
-/*fixed positioning pg 364, 368*/
-/*column for location section pg 375*/
-
 body {
   margin-top: 150px;
   background-color: rgb(169, 86, 52);
   color: rgb(25, 15, 3);
+}
+
+header {
+  position: fixed;
+  top: -35px;
+  left: 0px;
+  width: 100%;
 }
 
 nav {
@@ -21,15 +20,12 @@ nav {
   padding: 20px 30px;
 }
 
-header {
-  position: fixed;
-  top: -35px;
-  left: 0px;
-  width: 100%;
+nav ul {
+  height: 50px;
 }
 
-.nav {
-  display: inline;
+nav ul li {
+  display: inline-block;
   margin: 20px 40px;
   font-size: 20px;
 }
@@ -48,14 +44,9 @@ a:hover {
   color: rgb(186, 150, 87);
 }
 
-/*background image opacity .5
-background image attribution: https://www.flickr.com/photos/53532879@N07/10460205174/*/
-
-/*main background for all h2s or make others besides first after nav tan color: rgb(186, 150, 87);? */
 main {
   background-image: url(../images/main.jpg);
   background-attachment: fixed;
-  /*opacity: 0.3;*/
 }
 
 p {
@@ -67,18 +58,26 @@ h2 {
   padding: 20px 30px;
 }
 
-/*Location list displays to the left of the map*/
-.stores {
-  margin: 0 auto;
-}
-
-
 .image {
   margin: 0px 20px;
   height: 300px;
   width: 400px;
 }
 
-li {
+.menu li {
+  padding-left: 100px;
+  padding-right: 170px;
+}
+
+ol li {
   display: inline-block;
+  padding-left: 70px;
+}
+
+ol li:nth-child(2) {
+  padding-left: 120px;
+}
+
+ol li:nth-child(3) {
+  padding-left: 40px;
 }

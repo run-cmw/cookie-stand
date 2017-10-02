@@ -20,8 +20,12 @@ header {
   width: 100%;
 }
 
-.nav {
-  display: inline;
+nav ul {
+  height: 50px;
+}
+
+nav ul li {
+  display: inline-block;
   margin: 20px 40px;
   font-size: 20px;
 }
@@ -44,8 +48,7 @@ fieldset {
   margin-bottom: 30px;
   border: 3px dotted rgb(186, 150, 87);
   border-radius: 5px;
-  /*color: rgb(39, 49, 38);*/
-  color: color: rgb(25, 15, 3);
+  color: rgb(25, 15, 3);
   font-size: 18px;
 }
 
