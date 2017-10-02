@@ -10,7 +10,6 @@ nav {
   left: 200px;
   width: 70%;
   background-color: rgba(39, 49, 38, 0.5);
-  /*background-color: rgb(117, 71, 46);*/
   padding: 20px 30px;
 }
 
@@ -49,8 +48,7 @@ fieldset {
   margin-bottom: 30px;
   border: 3px dotted rgb(186, 150, 87);
   border-radius: 5px;
-  /*color: rgb(39, 49, 38);*/
-  color: color: rgb(25, 15, 3);
+  color: rgb(25, 15, 3);
   font-size: 18px;
 }
 

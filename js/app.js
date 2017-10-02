@@ -6,7 +6,6 @@ var combinedHourlyCookies = []; // bottom row
 var totalTotal = 0; // bottom right cell
 var storeTable = document.getElementById('stores'); // global because needed for render method and header and footer functions
 var addForm = document.getElementById('add-stores'); // variable to access HTML form that adds stores
-// var removeForm = document.getElementById('remove-stores'); // variable to access HTML form that removes stores
 
 function Store(location, minCust, maxCust, cookiesPerCust) {
   this.location = location;
@@ -93,6 +92,7 @@ function displayHeader() {
 
 // function to add the total cookies of each hour for every location
 function combineCookies() {
+  combinedHourlyCookies = [];
   for (var i = 0; i < hours.length; i++) {
     var combinedCookies = 0;
     for (var j = 0; j < allStores.length; j++) {
@@ -103,7 +103,8 @@ function combineCookies() {
 }
 
 // function for bottom right cell
-function displayTotalTotal() {
+function calcTotalTotal() {
+  // totalTotal = 0;
   for (var i = 0; i < hours.length; i++) {
     totalTotal += combinedHourlyCookies[i];
   }
@@ -111,7 +112,7 @@ function displayTotalTotal() {
 
 // function for total footer (hourly totals for all 5 stores data)
 function displayTotalsFooter() {
-  displayTotalTotal(); // this call can't be last b/c the outer function depends on them
+  calcTotalTotal(); // this call can't be last b/c the outer function depends on them
 
   // heading: create a row
   var trEl = document.createElement('tr');
@@ -137,6 +138,7 @@ function displayTotalsFooter() {
 function executeAll() {
   displayHeader();
   for (var i = 0; i < allStores.length; i++) {
+    allStores[i].hourlyCookiesArr = [];
     allStores[i].hourlyCookiesPush();
     allStores[i].totalDailyCookies();
     allStores[i].renderTable();
@@ -146,7 +148,7 @@ function executeAll() {
 }
 
 // event handler
-function handleAddSubmit(event) {
+function handleSubmit(event) {
 
   event.preventDefault();
 
@@ -167,22 +169,18 @@ function handleAddSubmit(event) {
     return;
   }
 
-
-  console.log(allStores);
-  event.target.location.value = ''; // clear form fields
+  event.target.location.value = '';
   event.target.min.value = '';
   event.target.max.value = '';
   event.target.cookies.value = '';
-  stores.innerHTML = ''; // clear table conent
+  stores.innerHTML = '';
 
   new Store (location, min, max, cookiesPurchased);
-  console.log(allStores);
 
   executeAll();
 }
 
-//event listeners
-addForm.addEventListener('submit', handleAddSubmit);
-// removeForm.addEventListener('submit', ________);
+//event listener
+addForm.addEventListener('submit', handleSubmit);
 
 executeAll();
