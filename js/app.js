@@ -29,6 +29,7 @@ Store.prototype.hourlyCookiesPush = function() {
   }
 };
 Store.prototype.totalDailyCookies = function() {
+  this.dailyCookies = 0;
   for (var i = 0; i < this.hourlyCookiesArr.length; i++) {
     this.dailyCookies += this.hourlyCookiesArr[i];
   }
